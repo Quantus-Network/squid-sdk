@@ -193,7 +193,7 @@ function toBaseDataRequest(req: DataRequest): base.DataRequest {
     if (calls) {
         baseReq.extrinsics = {
             hash: !!req.fields?.extrinsic?.hash,
-            fee: !!req.fields?.extrinsic?.fee
+            fee: !!req.fields?.extrinsic?.fee,
             hashFn: req.extrinsicHashFn
         }
     }

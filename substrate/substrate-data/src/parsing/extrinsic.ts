@@ -3,6 +3,7 @@ import {decodeHex, toHex} from '@subsquid/util-internal-hex'
 import blake2b from 'blake2b'
 import {Extrinsic} from '../interfaces/data'
 
+/**
  * Hash function interface to derive extrinsic hash.
  * Accepts raw extrinsic bytes and returns hash encoded as hex-prefixed string.
  */

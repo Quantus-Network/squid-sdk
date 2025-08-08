@@ -322,7 +322,7 @@ export class SubstrateBatchProcessor<F extends FieldSelection = {}> {
     private add(request: DataRequest, range?: Range): void {
         this.requests.push({
             range: range || {from: 0},
-            request
+            request: { ...request, extrinsicHashFn: this.extrinsicHashFn }
         })
     }
 
