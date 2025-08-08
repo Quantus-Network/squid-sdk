@@ -9,7 +9,7 @@ import {Block, BlockHeader, Call, DataRequest, Event, Extrinsic} from '../interf
 import {RawBlock} from '../interfaces/data-raw'
 import {parseCalls} from './call'
 import {decodeEvents} from './event'
-import {DecodedExtrinsic, decodeExtrinsics} from './extrinsic'
+import {DecodedExtrinsic, decodeExtrinsics, HashFn} from './extrinsic'
 import {setExtrinsicFeesFromCalc, setExtrinsicFeesFromPaidEvent} from './fee'
 import {supportsFeeCalc} from './fee/calc'
 import {getBlockTimestamp} from './timestamp'
