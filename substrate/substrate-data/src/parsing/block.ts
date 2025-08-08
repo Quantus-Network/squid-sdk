@@ -19,7 +19,7 @@ import {DigestItem, IDigestItem} from './validator/types'
 
 
 export function parseBlock(src: RawBlock, options: DataRequest): Block {
-    let bp = new BlockParser(src, !!options.extrinsics?.hash)
+    let bp = new BlockParser(src, !!options.extrinsics?.hash || !!options.extrinsics?.hashFn, options.extrinsics?.hashFn)
     let block = bp.block()
 
     if (options.blockTimestamp) {
@@ -65,7 +65,11 @@ export function parseBlock(src: RawBlock, options: DataRequest): Block {
 class BlockParser {
     public readonly runtime: Runtime
 
-    constructor(private src: RawBlock, private withExtrinsicHash: boolean) {
+    constructor(
+        private src: RawBlock,
+        private withExtrinsicHash: boolean,
+        private hashFn?: HashFn
+    ) {
         this.runtime = assertNotNull(src.runtime)
     }
 
@@ -99,7 +103,7 @@ class BlockParser {
     @def
     decodedExtrinsics(): DecodedExtrinsic[] {
         let extrinsics = assertNotNull(this.src.block.block.extrinsics, 'extrinsic data is not provided')
-        return decodeExtrinsics(this.runtime, extrinsics, this.withExtrinsicHash)
+        return decodeExtrinsics(this.runtime, extrinsics, this.withExtrinsicHash, this.hashFn)
     }
 
     @def

@@ -149,6 +149,12 @@ export interface DataRequest {
     events?: boolean
     extrinsics?: {
         hash?: boolean
+        /**
+         * Optional custom hash implementation to derive the extrinsic hash.
+         * Takes raw extrinsic bytes and must return a hex-prefixed string (0x...).
+         * If provided, it overrides the default Blake2b algorithm.
+         */
+        hashFn?: (bytes: Uint8Array) => Bytes
         fee?: boolean
     }
 }
