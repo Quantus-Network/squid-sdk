@@ -2,6 +2,8 @@ import type {Bytes, QualifiedName} from '@subsquid/substrate-data'
 import type {FieldSelection} from './data'
 
 
+export type ExtrinsicHashFn = (bytes: Uint8Array) => Bytes
+
 export interface DataRequest {
     fields?: FieldSelection
     includeAllBlocks?: boolean
@@ -13,6 +15,7 @@ export interface DataRequest {
     gearMessagesQueued?: GearMessageQueuedRequest[]
     gearUserMessagesSent?: GearUserMessageSentRequest[]
     reviveContractEmitted?: ReviveContractEmittedRequest[]
+    extrinsicHashFn?: ExtrinsicHashFn
 }
 
 

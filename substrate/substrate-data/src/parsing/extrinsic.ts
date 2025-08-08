@@ -3,6 +3,12 @@ import {decodeHex, toHex} from '@subsquid/util-internal-hex'
 import blake2b from 'blake2b'
 import {Extrinsic} from '../interfaces/data'
 
+/**
+ * Hash function interface to derive extrinsic hash.
+ * Accepts raw extrinsic bytes and returns hash encoded as hex-prefixed string.
+ */
+export type HashFn = (bytes: Uint8Array) => Bytes
+
 
 export interface DecodedExtrinsic {
     extrinsic: Extrinsic
@@ -13,7 +19,8 @@ export interface DecodedExtrinsic {
 export function decodeExtrinsics(
     runtime: Runtime,
     extrinsics: Bytes[],
-    withHash: boolean
+    withHash: boolean,
+    hashFn: HashFn = (bytes) => toHex(blake2b(32).update(bytes).digest())
 ): DecodedExtrinsic[] {
     return extrinsics.map((hex, index) => {
         let bytes = decodeHex(hex)
@@ -29,7 +36,7 @@ export function decodeExtrinsics(
         }
 
         if (withHash) {
-            extrinsic.hash = toHex(blake2b(32).update(bytes).digest())
+            extrinsic.hash = hashFn(bytes)
         }
 
         let call = runtime.toCallRecord(src.call)

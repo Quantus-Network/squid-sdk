@@ -167,6 +167,7 @@ export class SubstrateBatchProcessor<F extends FieldSelection = {}> {
     private typesBundle?: OldTypesBundle | OldSpecsBundle
     private prometheus = new PrometheusServer()
     private running = false
+    private extrinsicHashFn?: (bytes: Uint8Array) => import('@subsquid/substrate-data').Bytes
 
     /**
      * @deprecated Use {@link .setGateway()}
@@ -274,6 +275,15 @@ export class SubstrateBatchProcessor<F extends FieldSelection = {}> {
         return this
     }
 
+    /**
+     * Override the default Blake2b extrinsic hash with a custom implementation (e.g. Poseidon).
+     */
+    setExtrinsicHashFn(fn: (bytes: Uint8Array) => import('@subsquid/substrate-data').Bytes): this {
+        this.assertNotRunning()
+        this.extrinsicHashFn = fn
+        return this
+    }
+
 
     /**
      * Limits the range of blocks to be processed.
@@ -312,7 +322,7 @@ export class SubstrateBatchProcessor<F extends FieldSelection = {}> {
     private add(request: DataRequest, range?: Range): void {
         this.requests.push({
             range: range || {from: 0},
-            request
+            request: { ...request, extrinsicHashFn: this.extrinsicHashFn }
         })
     }
 
