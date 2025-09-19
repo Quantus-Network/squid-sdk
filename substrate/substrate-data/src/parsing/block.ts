@@ -19,7 +19,7 @@ import {DigestItem, IDigestItem} from './validator/types'
 
 
 export function parseBlock(src: RawBlock, options: DataRequest): Block {
-    let bp = new BlockParser(src, !!options.extrinsics?.hash || !!options.extrinsics?.hashFn, options.extrinsics?.hashFn)
+    let bp = new BlockParser(src, !!options.extrinsics?.hash, options.extrinsics?.hashFn)
     let block = bp.block()
 
     if (options.blockTimestamp) {
