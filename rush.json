@@ -526,6 +526,12 @@
       "versionPolicyName": "npm"
     },
     {
+      "packageName": "@subsquid/solana-spray",
+      "projectFolder": "solana/solana-spray",
+      "shouldPublish": true,
+      "versionPolicyName": "npm"
+    },
+    {
       "packageName": "@subsquid/solana-stream",
       "projectFolder": "solana/solana-stream",
       "shouldPublish": true,
@@ -726,6 +732,12 @@
     {
       "packageName": "@subsquid/http-client",
       "projectFolder": "util/http-client",
+      "shouldPublish": true,
+      "versionPolicyName": "npm"
+    },
+    {
+      "packageName": "@subsquid/portal-client",
+      "projectFolder": "util/portal-client",
       "shouldPublish": true,
       "versionPolicyName": "npm"
     },
@@ -998,6 +1010,12 @@
     {
       "packageName": "@subsquid/starknet-stream",
       "projectFolder": "starknet/starknet-stream",
+      "shouldPublish": true,
+      "versionPolicyName": "npm"
+    },
+    {
+      "packageName": "@subsquid/starknet-rpc",
+      "projectFolder": "starknet/starknet-rpc",
       "shouldPublish": true,
       "versionPolicyName": "npm"
     },
